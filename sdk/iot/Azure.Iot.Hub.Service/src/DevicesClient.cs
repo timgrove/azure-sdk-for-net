@@ -157,7 +157,7 @@ namespace Azure.Iot.Hub.Service
                     Capabilities = x.Key.Capabilities,
                     DeviceScope = x.Key.DeviceScope,
                     ParentScopes = x.Key.ParentScopes,
-                    Status = String.Equals(ExportImportDeviceStatus.Disabled.ToString(), x.Key.Status?.ToString(), StringComparison.OrdinalIgnoreCase) ? ExportImportDeviceStatus.Disabled : ExportImportDeviceStatus.Enabled,
+                    Status = string.Equals(ExportImportDeviceStatus.Disabled.ToString(), x.Key.Status?.ToString(), StringComparison.OrdinalIgnoreCase) ? ExportImportDeviceStatus.Disabled : ExportImportDeviceStatus.Enabled,
                     StatusReason = x.Key.StatusReason,
                     Tags = x.Value.Tags,
                     Properties = new PropertyContainer(x.Value.Properties?.Desired, x.Value.Properties?.Reported),
@@ -185,7 +185,7 @@ namespace Azure.Iot.Hub.Service
                     Capabilities = x.Key.Capabilities,
                     DeviceScope = x.Key.DeviceScope,
                     ParentScopes = x.Key.ParentScopes,
-                    Status = String.Equals(ExportImportDeviceStatus.Disabled.ToString(), x.Key.Status?.ToString(), StringComparison.OrdinalIgnoreCase) ? ExportImportDeviceStatus.Disabled : ExportImportDeviceStatus.Enabled,
+                    Status = string.Equals(ExportImportDeviceStatus.Disabled.ToString(), x.Key.Status?.ToString(), StringComparison.OrdinalIgnoreCase) ? ExportImportDeviceStatus.Disabled : ExportImportDeviceStatus.Enabled,
                     StatusReason = x.Key.StatusReason,
                     Tags = x.Value.Tags,
                     Properties = new PropertyContainer(x.Value.Properties?.Desired, x.Value.Properties?.Reported),
@@ -212,7 +212,7 @@ namespace Azure.Iot.Hub.Service
                     Capabilities = x.Capabilities,
                     DeviceScope = x.DeviceScope,
                     ParentScopes = x.ParentScopes,
-                    Status = String.Equals(ExportImportDeviceStatus.Disabled.ToString(), x.Status?.ToString(), StringComparison.OrdinalIgnoreCase) ? ExportImportDeviceStatus.Disabled : ExportImportDeviceStatus.Enabled,
+                    Status = string.Equals(ExportImportDeviceStatus.Disabled.ToString(), x.Status?.ToString(), StringComparison.OrdinalIgnoreCase) ? ExportImportDeviceStatus.Disabled : ExportImportDeviceStatus.Enabled,
                     StatusReason = x.StatusReason,
                     ImportMode = ExportImportDeviceImportMode.Create
                 });
@@ -237,7 +237,7 @@ namespace Azure.Iot.Hub.Service
                     Capabilities = x.Capabilities,
                     DeviceScope = x.DeviceScope,
                     ParentScopes = x.ParentScopes,
-                    Status = String.Equals(ExportImportDeviceStatus.Disabled.ToString(), x.Status?.ToString(), StringComparison.OrdinalIgnoreCase) ? ExportImportDeviceStatus.Disabled : ExportImportDeviceStatus.Enabled,
+                    Status = string.Equals(ExportImportDeviceStatus.Disabled.ToString(), x.Status?.ToString(), StringComparison.OrdinalIgnoreCase) ? ExportImportDeviceStatus.Disabled : ExportImportDeviceStatus.Enabled,
                     StatusReason = x.StatusReason,
                     ImportMode = ExportImportDeviceImportMode.Create
                 });
@@ -265,7 +265,7 @@ namespace Azure.Iot.Hub.Service
                     DeviceScope = x.DeviceScope,
                     ParentScopes = x.ParentScopes,
                     ETag = x.Etag,
-                    Status = String.Equals(ExportImportDeviceStatus.Disabled.ToString(), x.Status?.ToString(), StringComparison.OrdinalIgnoreCase) ? ExportImportDeviceStatus.Disabled : ExportImportDeviceStatus.Enabled,
+                    Status = string.Equals(ExportImportDeviceStatus.Disabled.ToString(), x.Status?.ToString(), StringComparison.OrdinalIgnoreCase) ? ExportImportDeviceStatus.Disabled : ExportImportDeviceStatus.Enabled,
                     StatusReason = x.StatusReason,
                     ImportMode = force ? ExportImportDeviceImportMode.Update : ExportImportDeviceImportMode.UpdateIfMatchETag
                 });
@@ -293,7 +293,7 @@ namespace Azure.Iot.Hub.Service
                     DeviceScope = x.DeviceScope,
                     ParentScopes = x.ParentScopes,
                     ETag = x.Etag,
-                    Status = String.Equals(ExportImportDeviceStatus.Disabled.ToString(), x.Status?.ToString(), StringComparison.OrdinalIgnoreCase) ? ExportImportDeviceStatus.Disabled : ExportImportDeviceStatus.Enabled,
+                    Status = string.Equals(ExportImportDeviceStatus.Disabled.ToString(), x.Status?.ToString(), StringComparison.OrdinalIgnoreCase) ? ExportImportDeviceStatus.Disabled : ExportImportDeviceStatus.Enabled,
                     StatusReason = x.StatusReason,
                     ImportMode = force ? ExportImportDeviceImportMode.Update : ExportImportDeviceImportMode.UpdateIfMatchETag
                 });
@@ -360,8 +360,7 @@ namespace Azure.Iot.Hub.Service
                     Query = "select * from devices"
                 };
                 Response<IReadOnlyList<TwinData>> response = await _registryManagerClient.QueryIotHubAsync(querySpecification, null, pageSizeHint?.ToString(), cancellationToken).ConfigureAwait(false);
-                string continuationToken;
-                response.GetRawResponse().Headers.TryGetValue(ContinuationTokenHeader, out continuationToken);
+                response.GetRawResponse().Headers.TryGetValue(ContinuationTokenHeader, out string continuationToken);
 
                 return Page.FromValues(response.Value, continuationToken, response.GetRawResponse());
             }
@@ -370,8 +369,7 @@ namespace Azure.Iot.Hub.Service
             {
                 var querySpecification = new QuerySpecification();
                 Response<IReadOnlyList<TwinData>> response = await _registryManagerClient.QueryIotHubAsync(querySpecification, nextLink, pageSizeHint?.ToString(), cancellationToken).ConfigureAwait(false);
-                string continuationToken;
-                response.GetRawResponse().Headers.TryGetValue(ContinuationTokenHeader, out continuationToken);
+                response.GetRawResponse().Headers.TryGetValue(ContinuationTokenHeader, out string continuationToken);
                 return Page.FromValues(response.Value, continuationToken, response.GetRawResponse());
             }
 
@@ -395,8 +393,7 @@ namespace Azure.Iot.Hub.Service
 
                 Response<IReadOnlyList<TwinData>> response = _registryManagerClient.QueryIotHub(querySpecification, null, pageSizeHint?.ToString(), cancellationToken);
 
-                string continuationToken;
-                response.GetRawResponse().Headers.TryGetValue(ContinuationTokenHeader, out continuationToken);
+                response.GetRawResponse().Headers.TryGetValue(ContinuationTokenHeader, out string continuationToken);
 
                 return Page.FromValues(response.Value, continuationToken, response.GetRawResponse());
             }
@@ -416,7 +413,7 @@ namespace Azure.Iot.Hub.Service
         /// Get a device's twin.
         /// </summary>
         /// <param name="deviceId">The unique identifier of the device to get the twin of.</param>
-        /// <param name="cancellationToken">The cancellation token</param>
+        /// <param name="cancellationToken">The cancellation token.</param>
         /// <returns>The device's twin, including reported properties and desired properties.</returns>
         public virtual async Task<Response<TwinData>> GetTwinAsync(string deviceId, CancellationToken cancellationToken = default)
         {
@@ -427,7 +424,7 @@ namespace Azure.Iot.Hub.Service
         /// Get a device's twin.
         /// </summary>
         /// <param name="deviceId">The unique identifier of the device to get the twin of.</param>
-        /// <param name="cancellationToken">The cancellation token</param>
+        /// <param name="cancellationToken">The cancellation token.</param>
         /// <returns>The device's twin, including reported properties and desired properties.</returns>
         public virtual Response<TwinData> GetTwin(string deviceId, CancellationToken cancellationToken = default)
         {
@@ -441,7 +438,7 @@ namespace Azure.Iot.Hub.Service
         /// <param name="ifMatch">A string representing a weak ETag for this twin, as per RFC7232. The update operation is performed
         /// only if this ETag matches the value maintained by the server, indicating that the twin has not been modified since it was last retrieved.
         /// To force an unconditional update, set If-Match to the wildcard character (*).</param>
-        /// <param name="cancellationToken">The cancellation token</param>
+        /// <param name="cancellationToken">The cancellation token.</param>
         /// <returns>The server's new representation of the device twin.</returns>
         public virtual async Task<Response<TwinData>> UpdateTwinAsync(TwinData twinPatch, string ifMatch = null, CancellationToken cancellationToken = default)
         {
@@ -457,7 +454,7 @@ namespace Azure.Iot.Hub.Service
         /// <param name="ifMatch">A string representing a weak ETag for this twin, as per RFC7232. The update operation is performed
         /// only if this ETag matches the value maintained by the server, indicating that the twin has not been modified since it was last retrieved.
         /// To force an unconditional update, set If-Match to the wildcard character (*).</param>
-        /// <param name="cancellationToken">The cancellation token</param>
+        /// <param name="cancellationToken">The cancellation token.</param>
         /// <returns>The server's new representation of the device twin.</returns>
         public virtual Response<TwinData> UpdateTwin(TwinData twinPatch, string ifMatch = null, CancellationToken cancellationToken = default)
         {
@@ -469,10 +466,10 @@ namespace Azure.Iot.Hub.Service
         /// <summary>
         /// Update multiple devices' twins. A maximum of 100 updates can be done per call, and each operation must be done on a different device twin. For larger scale operations, consider using IoT Hub jobs (https://docs.microsoft.com/en-us/azure/iot-hub/iot-hub-devguide-identity-registry#import-and-export-device-identities).
         /// </summary>
-        /// <param name="twinUpdates">The new twins to replace the twins on existing devices</param>
+        /// <param name="twinUpdates">The new twins to replace the twins on existing devices.</param>
         /// <param name="force">If true, all the update operations will ignore the provided twin ETags and will
         /// force the update. If false, each update operation will fail if the provided ETag for the update is out of date.</param>
-        /// <param name="cancellationToken">The cancellation token</param>
+        /// <param name="cancellationToken">The cancellation token.</param>
         /// <returns>The result of the bulk operation.</returns>
         public virtual async Task<Response<BulkRegistryOperationResult>> UpdateTwinsAsync(IEnumerable<TwinData> twinUpdates, bool force, CancellationToken cancellationToken = default)
         {
@@ -493,10 +490,10 @@ namespace Azure.Iot.Hub.Service
         /// <summary>
         /// Update multiple devices' twins. A maximum of 100 updates can be done per call, and each operation must be done on a different device twin. For larger scale operations, consider using IoT Hub jobs (https://docs.microsoft.com/en-us/azure/iot-hub/iot-hub-devguide-identity-registry#import-and-export-device-identities).
         /// </summary>
-        /// <param name="twinUpdates">The new twins to replace the twins on existing devices</param>
+        /// <param name="twinUpdates">The new twins to replace the twins on existing devices.</param>
         /// <param name="force">If true, all the update operations will ignore the provided twin ETags and will
         /// force the update. If false, each update operation will fail if the provided ETag for the update is out of date.</param>
-        /// <param name="cancellationToken">The cancellation token</param>
+        /// <param name="cancellationToken">The cancellation token.</param>
         /// <returns>The result of the bulk operation.</returns>
         public virtual Response<BulkRegistryOperationResult> UpdateTwins(IEnumerable<TwinData> twinUpdates, bool force, CancellationToken cancellationToken = default)
         {
