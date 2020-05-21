@@ -10,7 +10,7 @@ using Azure.Iot.Hub.Service.Models;
 namespace Azure.Iot.Hub.Service
 {
     /// <summary>
-    ///
+    /// TODO:
     /// </summary>
     public class ModulesClient
     {

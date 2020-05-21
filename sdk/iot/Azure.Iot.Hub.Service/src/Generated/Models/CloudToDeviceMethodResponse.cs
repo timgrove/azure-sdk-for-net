@@ -18,7 +18,7 @@ namespace Azure.Iot.Hub.Service.Models
         /// <summary> Initializes a new instance of CloudToDeviceMethodResponse. </summary>
         /// <param name="status"> Method invocation result status. </param>
         /// <param name="payload"> Method invocation result payload. </param>
-        internal CloudToDeviceMethodResponse(int? status, object payload)
+        internal CloudToDeviceMethodResponse(int? status, string payload)
         {
             Status = status;
             Payload = payload;
@@ -26,7 +26,5 @@ namespace Azure.Iot.Hub.Service.Models
 
         /// <summary> Method invocation result status. </summary>
         public int? Status { get; }
-        /// <summary> Method invocation result payload. </summary>
-        public object Payload { get; }
     }
 }

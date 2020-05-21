@@ -23,7 +23,7 @@ namespace Azure.Iot.Hub.Service.Models
             if (Payload != null)
             {
                 writer.WritePropertyName("payload");
-                writer.WriteObjectValue(Payload);
+                writer.WriteStringValue(Payload);
             }
             if (ResponseTimeoutInSeconds != null)
             {
@@ -41,7 +41,7 @@ namespace Azure.Iot.Hub.Service.Models
         internal static CloudToDeviceMethodRequest DeserializeCloudToDeviceMethodRequest(JsonElement element)
         {
             string methodName = default;
-            object payload = default;
+            string payload = default;
             int? responseTimeoutInSeconds = default;
             int? connectTimeoutInSeconds = default;
             foreach (var property in element.EnumerateObject())
@@ -61,7 +61,7 @@ namespace Azure.Iot.Hub.Service.Models
                     {
                         continue;
                     }
-                    payload = property.Value.GetObject();
+                    payload = property.Value.GetString();
                     continue;
                 }
                 if (property.NameEquals("responseTimeoutInSeconds"))

@@ -11,5 +11,9 @@ namespace Azure.Iot.Hub.Service.Models
     [CodeGenModel("CloudToDeviceMethodResult")]
     public partial class CloudToDeviceMethodResponse
     {
+        /// <summary>
+        /// The JSON-formatted direct method result payload, up to 128kb in size; provided by the device.
+        /// </summary>
+        public string Payload { get; }
     }
 }

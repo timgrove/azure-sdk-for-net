@@ -20,7 +20,7 @@ namespace Azure.Iot.Hub.Service.Models
         /// <param name="payload"> Payload. </param>
         /// <param name="responseTimeoutInSeconds"> . </param>
         /// <param name="connectTimeoutInSeconds"> . </param>
-        internal CloudToDeviceMethodRequest(string methodName, object payload, int? responseTimeoutInSeconds, int? connectTimeoutInSeconds)
+        internal CloudToDeviceMethodRequest(string methodName, string payload, int? responseTimeoutInSeconds, int? connectTimeoutInSeconds)
         {
             MethodName = methodName;
             Payload = payload;
@@ -30,8 +30,6 @@ namespace Azure.Iot.Hub.Service.Models
 
         /// <summary> Method to run. </summary>
         public string MethodName { get; set; }
-        /// <summary> Payload. </summary>
-        public object Payload { get; set; }
         public int? ResponseTimeoutInSeconds { get; set; }
         public int? ConnectTimeoutInSeconds { get; set; }
     }

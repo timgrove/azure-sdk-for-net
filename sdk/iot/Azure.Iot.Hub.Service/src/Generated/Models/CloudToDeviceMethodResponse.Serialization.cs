@@ -15,7 +15,7 @@ namespace Azure.Iot.Hub.Service.Models
         internal static CloudToDeviceMethodResponse DeserializeCloudToDeviceMethodResponse(JsonElement element)
         {
             int? status = default;
-            object payload = default;
+            string payload = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("status"))
@@ -33,7 +33,7 @@ namespace Azure.Iot.Hub.Service.Models
                     {
                         continue;
                     }
-                    payload = property.Value.GetObject();
+                    payload = property.Value.GetString();
                     continue;
                 }
             }
