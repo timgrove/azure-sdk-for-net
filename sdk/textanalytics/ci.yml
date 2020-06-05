@@ -2,14 +2,7 @@
 # This file is generated automatically and any changes will be lost.
 
 resources:
-  repositories:
-    - repository: azure-sdk-tools
-      type: github
-      name: Azure/azure-sdk-tools
-      endpoint: azure
-    - repository: azure-sdk-build-tools
-      type: git
-      name: internal/azure-sdk-build-tools
+  - template: ../../eng/pipelines/templates/resources/repositories.yml
 
 trigger:
   branches:
