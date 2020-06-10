@@ -1,0 +1,18 @@
+resources:
+  repositories:
+    - repository: azure-sdk-tools
+      type: github
+      name: azure/azure-sdk-tools
+      endpoint: azure
+    - repository: azure-sdk-build-tools
+      type: git
+      name: internal/azure-sdk-build-tools
+      ref: refs/tags/azure-sdk-build-tools_20200514.1
+
+parameters:
+- name: CIStages
+  type: object
+  default: []
+
+stages: 
+- ${{ parameters.CIStages }}
